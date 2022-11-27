@@ -1,6 +1,5 @@
 package com.example.jingdong.bo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,6 +13,7 @@ public class ProductBo {
     private BigDecimal price;
     private BigDecimal oldPrice;
     private String imgUrl;
+    private String test;
 
 
 
