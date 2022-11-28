@@ -14,7 +14,6 @@ import com.example.jingdong.service.UserService;
 import com.example.jingdong.utils.CookieUtil;
 import com.example.jingdong.utils.ResultUtil;
 import com.example.jingdong.vo.UserVO;
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -37,7 +36,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-@Api(tags = "用户登录及信息接口")
 @Slf4j
 @RestController
 @RequestMapping("/user")

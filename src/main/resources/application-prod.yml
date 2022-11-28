@@ -32,7 +32,7 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
 swagger:
-  enable: true
+  enable: false
 
 #微信配置
 wechat:
