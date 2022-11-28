@@ -13,3 +13,6 @@ https://www.gaoshiyi.top
 由于没有微信开放平台配置原因 暂时无法实现扫码登录
 https://shop.gaoshiyi.top/seller/index 
 
+#### 前端项目地址
+https://github.com/yupeishan/jingdongH5-vue.git
+
