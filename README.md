@@ -18,4 +18,4 @@ https://github.com/yupeishan/jingdongH5-vue.git
 
 #### 引用
 商家后台基于X-Admin后台管理模板
-https://gitee.com/daniuit/X-admin.git
+https://github.com/xuxuxu-ni/vue-xuAdmin.git
