@@ -7,5 +7,7 @@ public class Const {
     //订单搜索查询 结束时间  timeStamp类型取值范围max
     public static final String END_TIME= "2038-01-19";
 
+    public static final String test= "2038-01-19";
+
 
 }
