@@ -1,4 +1,4 @@
 #全局yml文件
 spring:
   profiles:
-    active: dev
+    active: git
