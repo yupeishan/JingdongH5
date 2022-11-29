@@ -49,7 +49,7 @@ wechat:
   #支付商户秘钥
   mchKey: c56d0e9a7ccec67b4ea131655038d604
   #微信支付证书存储路径
-  keyPath: D:/wxpay/WXCertUtil/cert/apiclient_cert.p12
+  keyPath: D:/wxpay/WXCertUtil/cert/apiClient_cert.p12
   #微信支付结果异步通知接口
   notifyUrl: https://shop.gaoshiyi.top/pay/notify
 

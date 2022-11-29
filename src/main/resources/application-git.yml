@@ -37,28 +37,26 @@ swagger:
 #设置微信配置
 wechat:
   #公众号识别id
-#  mpAppId: wx32b98899abc39751
-  mpAppId: wx680e2c1d87e8226c
+  mpAppId: xxx
   #公众号秘钥
-#  mpAppSecret: da9b44f3ecf3b7b9b76626fd0c4bc928
-  mpAppSecret: 913842a25888610d49be5e0a3abd91db
-  #微信授权 获取code后 跳转获取用户信息的回调接口
-  mpUserInfoUrl: http://qiaomai.natapp4.cc/jingdong/wechat/userInfo
+  mpAppSecret: xxx
+  #微信授权 获取code后 跳转获取用户信息的回调接口  换成自己的内网穿透
+  mpUserInfoUrl: http://xxxx/jingdong/wechat/userInfo
   #微信支付生成的直连商户号
   mchId: 1572824121
   #支付商户秘钥
-  mchKey: c56d0e9a7ccec67b4ea131655038d604
-  #微信支付证书存储路径
-  keyPath: D:/wxpay/WXCertUtil/cert/apiclient_cert.p12
-  #微信支付结果异步通知接口
-  notifyUrl: http://qiaomai.natapp4.cc/jingdong/pay/notify
+  mchKey: xxx
+  #微信支付证书存储路径 换成自己的证书路径 要先开通微信支付商户号 需要营业执照
+  keyPath: xxx
+  #微信支付结果异步通知接口 xxxx此处换成自己的内网穿透
+  notifyUrl: http://xxxx/jingdong/pay/notify
 
 #设置开放平台 用于扫码登录
-  #微信开放平台唯一应用标识
-  openAppId: wx0626ceb11755f952
+  #微信开放平台唯一应用标识 需在微信开放平台开通自己的应用
+  openAppId: xxx
   #开放平台应用秘钥
-  openAppSecret: 2f57579f353115061444ac4599e20d18
-  #扫码登录获取信息的回调接口
-  openUserInfoUrl: http://qiaomai.natapp4.cc/jingdong/wechat/qrUserInfo
+  openAppSecret: xxx
+  #扫码登录获取信息的回调接口 xxxx此处换成自己的内网穿透
+  openUserInfoUrl: http://xxxx/jingdong/wechat/qrUserInfo
   #根目录
   baseUrl: http://127.0.0.1:8080
