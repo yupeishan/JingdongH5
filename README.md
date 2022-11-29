@@ -17,6 +17,13 @@ https://www.gaoshiyi.top
 扫码登录需配置自己的微信开放平台应用  
 https://shop.gaoshiyi.top/seller/index 
 
+#### 技术栈及环境
+- IntelliJ IDEA 2022.2.4
+- springboot 2.7.3 
+- JPA
+- redis 5.0
+- MySQL 8.0
+
 #### 关于微信支付与授权
 1.微信授权登录需要注册自己的微信公众号 没有公众号可以申请一个微信测试号  
 申请地址:https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login  
