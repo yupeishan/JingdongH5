@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/wechat_shop?useUnicode=true&charcterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/wechat_shop?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: 123
   redis:
@@ -54,7 +54,7 @@ wechat:
   #微信支付结果异步通知接口
   notifyUrl: http://qiaomai.natapp4.cc/jingdong/pay/notify
 
-#设置开放平台
+#设置开放平台 用于扫码登录
   #微信开放平台唯一应用标识
   openAppId: wx0626ceb11755f952
   #开放平台应用秘钥
