@@ -1,4 +1,0 @@
-#全局yml文件
-spring:
-  profiles:
-    active: config
