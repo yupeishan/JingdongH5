@@ -13,9 +13,9 @@ https://www.gaoshiyi.top
 由于没有微信开放平台配置原因 暂时无法实现扫码登录
 https://shop.gaoshiyi.top/seller/index 
 
-#### 前端项目代码
-https://gitee.com/peishanyu/jingdongH5-vue.git
+#### 前端项目地址
+https://github.com/yupeishan/jingdongH5-vue.git
 
 #### 引用
 商家后台基于X-Admin后台管理模板
-https://gitee.com/daniuit/X-admin.git
+https://github.com/xuxuxu-ni/vue-xuAdmin.git
