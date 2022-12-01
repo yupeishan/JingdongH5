@@ -203,6 +203,7 @@ public class OrderServiceImpl implements OrderService {
 
     //完成订单
     @Override
+    @Transactional
     public OrderDTO finishOrder(String orderNumber){
         //判断订单是否存在
         Order order = orderRepository.findByOrderNumber(orderNumber);
@@ -236,6 +237,7 @@ public class OrderServiceImpl implements OrderService {
 
     //支付订单
     @Override
+    @Transactional
     public OrderDTO payForOrder(String orderNumber ,String openId ,String transactionNumber) {
         //检查订单是否存在
         Order order = orderRepository.findByOrderNumber(orderNumber);
@@ -288,6 +290,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO refundOrder(String orderNumber, String openId) {
         //检查订单是否存在
         Order order = orderRepository.findByOrderNumber(orderNumber);
@@ -324,7 +327,6 @@ public class OrderServiceImpl implements OrderService {
 
         //返回库存
         productService.increaseStock(stockDTOList);
-
 
         //转换为orderDTO对象返回
         return orderToOrderDTO(save);
