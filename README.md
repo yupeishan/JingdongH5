@@ -19,7 +19,8 @@ https://shop.gaoshiyi.top/seller/index
 
 #### 技术栈及环境
 - IntelliJ IDEA 2022.2.4
-- springboot 2.7.3 
+- springboot 2.7.3
+- JDK 8
 - JPA
 - redis 5.0
 - MySQL 8.0
