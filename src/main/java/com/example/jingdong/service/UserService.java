@@ -7,6 +7,8 @@ import com.example.jingdong.pojo.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface UserService {
 
     //保存用户至数据库
@@ -25,7 +27,7 @@ public interface UserService {
     User register(UserRegisterForm userRegisterForm);
 
     //登录
-    User login(String username ,String password);
+    User login(String username, String password, HttpServletResponse response);
 
     //新用户微信授权登录应先设置用户名
     User setUsername(Integer id, String username);

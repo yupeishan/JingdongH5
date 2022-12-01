@@ -1,8 +1,5 @@
 package com.example.jingdong.controller.user;
 
-import com.alibaba.fastjson.JSON;
-import com.example.jingdong.constant.CookieConst;
-import com.example.jingdong.constant.RedisConst;
 import com.example.jingdong.domain.Result;
 import com.example.jingdong.enums.ResultEnum;
 import com.example.jingdong.exception.SellException;
@@ -11,7 +8,6 @@ import com.example.jingdong.form.UserForm;
 import com.example.jingdong.form.UserRegisterForm;
 import com.example.jingdong.pojo.User;
 import com.example.jingdong.service.UserService;
-import com.example.jingdong.utils.CookieUtil;
 import com.example.jingdong.utils.ResultUtil;
 import com.example.jingdong.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Objects;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
@@ -81,24 +75,10 @@ public class UserController {
             throw new SellException(ResultEnum.USER_PARAMS_ERROR);
         }
 
-        User user = userService.login(username, password);
+        User user = userService.login(username, password, response);
         if (user == null) {
             throw new SellException(ResultEnum.LOGIN_FAIL);
         }
-
-        //登录成功 将用户信息存储至redis及cookie
-        // 获取随机token
-        String token = UUID.randomUUID().toString();
-        //token生命周期
-        int expire = RedisConst.USER_EXPIRE;
-        //将对象序列化 存储redis
-        String userStr = JSON.toJSONString(user);
-
-        //将token拼接作为键 user作为值 存储至redis 生命周期为604800秒 7天
-        stringRedisTemplate.opsForValue().set(String.format(RedisConst.TOKEN_PREFIX, token),
-                userStr, expire, TimeUnit.SECONDS);
-        //将token存储至cookie
-        CookieUtil.setCookie(CookieConst.TOKEN, token, expire, response);
 
         //返回UserVO对象 去掉敏感信息
         UserVO userVO = new UserVO();
@@ -120,7 +100,6 @@ public class UserController {
             //通过token获取用户信息
             wxUserInfo = wxMpService.getOAuth2Service().getUserInfo(accessToken, null);
         } catch (WxErrorException e) {
-            log.info("授权失败 原因={}", e.getMessage());
             throw new SellException(ResultEnum.WECHAT_AUTH_FAIL);
         }
 
@@ -135,20 +114,6 @@ public class UserController {
             user.setNickname(wxUserInfo.getNickname());
             user = userService.save(user);
         }
-
-        //将用户信息存储至redis及cookie
-        // 获取随机token
-        String token = UUID.randomUUID().toString();
-        //token生命周期
-        int expire = RedisConst.USER_EXPIRE;
-        //将对象序列化 存储redis
-        String userStr = JSON.toJSONString(user);
-
-        //将token拼接作为键 user作为值 存储至redis 生命周期为604800秒 7天
-        stringRedisTemplate.opsForValue().set(String.format(RedisConst.TOKEN_PREFIX, token),
-                userStr, expire, TimeUnit.SECONDS);
-        //将token存储至cookie
-        CookieUtil.setCookie(CookieConst.TOKEN, token, expire, response);
 
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
@@ -248,7 +213,6 @@ public class UserController {
             //通过token获取用户信息
             wxUserInfo = wxMpService.getOAuth2Service().getUserInfo(accessToken, null);
         } catch (WxErrorException e) {
-            log.info("授权失败 原因={}", e.getMessage());
             throw new SellException(ResultEnum.WECHAT_AUTH_FAIL);
         }
 

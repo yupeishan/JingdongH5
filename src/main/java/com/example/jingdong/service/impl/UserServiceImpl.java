@@ -1,5 +1,8 @@
 package com.example.jingdong.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.example.jingdong.constant.CookieConst;
+import com.example.jingdong.constant.RedisConst;
 import com.example.jingdong.enums.ResultEnum;
 import com.example.jingdong.exception.SellException;
 import com.example.jingdong.form.PasswordForm;
@@ -8,21 +11,29 @@ import com.example.jingdong.form.UserRegisterForm;
 import com.example.jingdong.pojo.User;
 import com.example.jingdong.repository.UserRepository;
 import com.example.jingdong.service.UserService;
+import com.example.jingdong.utils.CookieUtil;
 import com.example.jingdong.utils.Md5Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public User save(User user) {
@@ -79,7 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
+    public User login(String username, String password, HttpServletResponse response) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new SellException(ResultEnum.USER_NOT_EXIST);
@@ -94,6 +105,20 @@ public class UserServiceImpl implements UserService {
         if (!passwordMD5.equals(user.getPassword())) {
             throw new SellException(ResultEnum.USER_PASSWORD_ERROR);
         }
+
+        //登录成功 将用户信息存储至redis及cookie
+        // 获取随机token
+        String token = UUID.randomUUID().toString();
+        //token生命周期
+        int expire = RedisConst.USER_EXPIRE;
+        //将对象序列化 存储redis
+        String userStr = JSON.toJSONString(user);
+
+        //将token拼接作为键 user作为值 存储至redis 生命周期为604800秒 7天
+        stringRedisTemplate.opsForValue().set(String.format(RedisConst.TOKEN_PREFIX, token),
+                userStr, expire, TimeUnit.SECONDS);
+        //将token存储至cookie
+        CookieUtil.setCookie(CookieConst.TOKEN, token, expire, response);
 
         return user;
     }
@@ -116,13 +141,13 @@ public class UserServiceImpl implements UserService {
         if (!byId.isPresent()){
             throw new SellException(ResultEnum.USER_NOT_EXIST);
         }
-        
+
         User user = byId.get();
         //校验该账号是否已设置用户名
         if (null != user.getUsername()){
             throw new SellException(ResultEnum.ACCOUNT_HAS_A_USERNAME);
         }
-        
+
         user.setUsername(username);
 
         return userRepository.save(user);
