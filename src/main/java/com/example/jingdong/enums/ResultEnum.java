@@ -42,6 +42,8 @@ public enum ResultEnum implements BaseEnum<Object>{
     USER_BOUNDING_FAIL(40012,"账号绑定失败"),
     USER_WECHAT_NOT_AUTH(40013,"用户微信未授权，请先用微信登录再操作"),
     USERNAME_LENGTH_ERROR(40014,"用户名长度不合法，应在6-18之间"),
+    PASSWORD_NOT_EXIST(40015,"用户未设置密码，请先使用微信登录修改密码"),
+
 
 
     //微信授权

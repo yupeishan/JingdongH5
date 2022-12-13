@@ -96,6 +96,11 @@ public class UserServiceImpl implements UserService {
             throw new SellException(ResultEnum.USER_NOT_EXIST);
         }
 
+        //微信授权登录用户 暂未设置密码 需要先微信登录修改密码才可使用账号密码登录
+        if (null == user.getPassword() || "".equals(user.getPassword())){
+            throw new SellException(ResultEnum.PASSWORD_NOT_EXIST);
+        }
+
         //校验密码
         //将用户编号转换为StringBuffer 翻转顺序 再转为String
         String reverseNumber = new StringBuffer(user.getNumber()).reverse().toString();
